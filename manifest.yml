@@ -1,0 +1,10 @@
+applications:
+  - path: .
+    name: <app name>
+    environment_json: {}
+    memory: 256M
+    instances: 1
+    disk_quota: 1024M
+    services:
+      - <app name>-cloudantNoSQLDB
+    command:  node-red -s settings.js -u .

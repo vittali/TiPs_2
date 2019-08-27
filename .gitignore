@@ -1,0 +1,7 @@
+.DS_store
+.npm
+.project
+node_modules
+<app name>_vcap.json
+.sessions.json
+*.backup
