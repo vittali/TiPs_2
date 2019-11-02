@@ -14,7 +14,7 @@
         "node-red-admin": "^0.1.5",
         "node-red-bluemix-nodes": "1.x",
         "node-red-contrib-scx-ibmiotapp": "0.x",
-        "node-red-dashboard": "~2.16.0",
+        "node-red-dashboard": "~2.17.1",
         "node-red-node-cf-cloudant": "0.x",
         "node-red-node-openwhisk": "0.x",
         "node-red-node-watson": "0.x",
