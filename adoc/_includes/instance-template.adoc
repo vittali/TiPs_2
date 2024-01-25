@@ -1,0 +1,129 @@
+
+== Instantiate template files
+
+The _My-Node-RED-App_ consists of two sets of files:
+
+* files that are project agnostic and can be used without modification,
+* templates files that needs to be populated with project specific data, mostly access codes.
+
+These files are available in the {r1}.
+
+=== Project agnostic files
+
+These include:
+
+ * `.bluemix/pipeline.yml`:  used by the Delivery pipeline of the Continuous Integration Toolchain.
+ * `flow.json`: the Node-RED application
+ * `package.json`: required by node.js
+ * `run-app.sh` and `run-client.sh`: shortcuts to run the app and the mqtt test client locally.
+
+
+[[pop]]
+=== Project specific files
+
+These files are templates and require customisation:
+
+.template files
+[[table2]]
+[cols=3*,options=header]
+|===
+|Name
+|Function
+|Changes
+
+|.gitignore
+|exclude files from being committed
+|`app name` -> `My-Node-RED-App` since the file with VCAP
+access code `My-Node-RED-App_vcap.json` is required only locally, and should not be exposed.
+
+|manifest.yml
+|tells the remote deploy stage how to build and start the app
+|`app name` -> `My-Node-RED-App`
+
+|settings.js
+|the Node-RED settings file, see the Node-RED documentation
+|access codes: NR-flow, NR-editor, VCAP, see <<table1>>
+
+|mqtt-client.js
+|used to publish messages and test the app
+|access codes: orgId, DAT and clientId
+
+|===
+
+
+The password property in the `settings.js` file for the NR-editor access code
+should be a hash rather than a plain text string.
+
+Generate the hash:
+
+[listing]
+$ node-red-admin hash-pw
+Password: <enter your NR-editor password>
+$2a$08$ufCvyA.kLcV4LRdCTLFsruX.ejTq1UkxiI4FLt3oLpXvs/J1dlGA.
+
+[[NRp, NR-editor password access code]]The result is the hash of the
+NR-editor password that goes into `settings.js`.
+
+Here are some hightlights of the required changes in the `My-Node-RED-App` project directory:
+
+
+.manifest.yml
+[source,yaml]
+----
+  applications:
+    - path: .
+      name: My-Node-RED-App <1>
+      environment_json: {}
+      memory: 256M
+      instances: 1
+      disk_quota: 1024M
+      services:
+        - My-Node-RED-App-cloudantNoSQLDB <2>
+      command:  node-red -s settings.js -u .
+----
+<1> application name
+<2> name of the connection between the app and the database.
+
+.settings.js
+[source,javascript]
+----
+// ...
+var vcap = "My-Node-RED-App_vcap.json"; <1>
+// ...
+credentialSecret: "My-Node-RED-AppCredential", <2>
+adminAuth: {
+  type: "credentials",
+  users: [{
+    username: "admin", <3>
+    password: "$2a$08$LUhdfsdafgasggdfgdfgerferg", <4>
+    permissions: "*"
+  }],
+},
+----
+<1> The file name containing the VCAP access code environment variable.
+<2> The NR-flow accesscode. I choose _My-Node-RED-AppCredential_.
+For production code replace this with an environment variable.
+<3> The NR-editor username access code. I choose _admin_.
+<4> The <<NRp>> generated in the previous step.
+
+WARNING: If the NR-flow access-code is changed after the first app execution, there is - to my knowledge
+- no other way to apply the change than deleting the ./node_module director inside the
+project directory.
+
+.mqtt-client.js
+[source,javascript]
+----
+// ...
+var client = mqtt.connect('mqtt://nhr9i3.messaging.internetofthings.ibmcloud.com', { <1>
+  "username": "use-token-auth",
+  "password": "nodejs-client-1-token", <2>
+  "clientId": "d:nhr9i3:nodejs-client:nodejs-client-1" <3>
+
+})
+// ...
+----
+<1> assuming orgId is *nhr9i3*, yours will be different
+<2> the <<dat>>
+<3> client identifier: d:orgId:device_type:device
+
+Ready to finish the local installation and initialize the app.

@@ -1,0 +1,41 @@
+= Choosing a software toolchain for a cloud connected sensor
+:includedir: _includes
+:imagesdir: ./images
+:icons: font
+:toc: left
+:nofooter:
+:source-highlighter: highlightjs
+:sectnums:
+
+:r1: https://github.com/vittali/TiPs_2[compagnion repo]
+
+// MQTT
+
+// Node-RED
+:rNR-1: https://nodered.org[Node-RED]
+
+:keywords: Node-RED, IBM cloud, bluemix, mqtt, IoT, internet of things, cloudant, \
+node.js
+
+[abstract]
+icon:home[link="https://vittali.ch"]
+
+I have a microcontroller and I want to upload sensor data
+to the internet. I also want a database to store sensor readings and a nice gui so that others can use it.
+Setting up my own server and maintaining it is not worth the effort. So I want
+a cloud service, more precisely a _free_ cloud service.
+
+This memo is a write-up of one way to set up the required software infrastructure.
+I will describe hardware components like sensors in another memo.
+
+The project files can be cloned from the {r1}.
+
+include::{includedir}/intro.adoc[]
+include::{includedir}/terminology.adoc[]
+include::{includedir}/create-app.adoc[]
+include::{includedir}/create-iot.adoc[]
+include::{includedir}/install-software.adoc[]
+include::{includedir}/instance-template.adoc[]
+include::{includedir}/workflow-init.adoc[]
+include::{includedir}/workflow.adoc[]
+include::{includedir}/refs.adoc[]

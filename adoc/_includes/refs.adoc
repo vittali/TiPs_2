@@ -1,0 +1,42 @@
+
+== References
+
+[bibliography]
+=== IoT tutorials
+
+- https://developer.ibm.com/tutorials/category/iot/[IoT – IBM Developer]
+
+[bibliography]
+=== IoT development with Java
+
+- [[[r1]]]: https://developer.ibm.com/tutorials/cl-mqtt-bluemix-iot-node-red-app/[Explore MQTT and the Internet of Things service – IBM Developer]
+- [[[r2]]]: https://github.com/watson-developer-cloud/java-sdk[watson-developer-cloud/java-sdk: :1st_place_medal: Java SDK to use the IBM Watson services]
+- [[[r3]]]: https://github.com/ibm-watson-iot/iot-java[ibm-watson-iot/iot-java: Client libraries and samples for connecting to IBM Watson IoT using Java]
+- [[[r4]]]: https://cloud.ibm.com/docs/services/IoT/reference?topic=iot-platform-api_overview#api_http?cm_mc_uid=17830945645815473099532&cm_mc_sid_50200000=16394121565595004152[IBM Watson IoT Platform Organization Administration REST APIs]
+- [[[r5]]]: https://developer.ibm.com/recipes/tutorials/use-the-java-client-library-to-connect-to-the-ibm-internet-of-things-iot-foundation[IBM Watson IoT Platform OSHI Device Client]
+- [[[r6]]]: https://github.com/ibm-watson-iot/iot-java/tree/master/samples/oshi[IBM Watson IoT Platform Java SDK]
+- [[[r7]]]: https://developer.ibm.com/recipes/tutorials/multiple-iot-device-simulation-using-java-client-library/[Multiple IoT Device Registration & Simulation Application]
+- [[[r8]]]: https://developer.ibm.com/answers/questions/165207/connecting-to-iot-internet-of-things-from-my-java/[Connecting to IOT (Internet Of Things) from my Java Program using REST Api]
+
+[bibliography]
+=== IoT with REST API
+
+- [[[r11]]]: https://docs.internetofthings.ibmcloud.com/apis/swagger/v0002/org-admin.html[IBM Watson IoT API]
+
+[bibliography]
+=== Cloudant
+
+- [[[r21]]]: https://cloud.ibm.com/docs/services/Cloudant/api?topic=cloudant-creating-an-ibm-cloudant-query[Creating an IBM Cloudant Query]
+- [[[r22]]]: https://github.com/cloudant/java-cloudant[the official Cloudant library for Java]
+- [[[r23]]]: https://cloud.ibm.com/docs/services/Cloudant/api?topic=cloudant-creating-an-ibm-cloudant-query[Creating an IBM Cloudant Query]
+
+[bibliography]
+=== Node-RED & Node.js
+
+- [[[r31]]]: https://developer.ibm.com/recipes/tutorials/creating-a-multiple-output-function-in-nodered-2-minute-read/
+[Creating a multiple output "Switch" function in Node-RED ( 2 minute read ) - developerWorks Recipes]
+- [[[r32]]]: http://noderedguide.com/node-red-lecture-3-example-3-2-using-the-switch-node-to-handle-a-json-object/
+[Node-RED: Lecture 3 – Example 3.2 Using the switch node to handle a JSON object – Node RED Programming Guide]
+- [[[r33]]]: https://www.npmjs.com/package/mqtt[mqtt - npm]
+- [[[r34]]]: https://www.npmjs.com/package/reload[reload - npm]
+- [[[r35]]]: https://ibmcode-staging.us-east.containers.mybluemix.net/tutorials/learn-nodejs-node-with-cloudant-dbaas/[Learn Node.js, Unit 14: Node.js with Cloudant DBaaS – IBM Developer]

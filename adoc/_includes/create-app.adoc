@@ -1,0 +1,66 @@
+
+== Create the _My-Node-RED-App_ and the associated infrastructure
+
+Create three items:
+
+. the application itself,
+. the database used to store sensor data.
+. the build and deploy delivery toolchain
+
+NOTE: there are several Node-RED-Bluemix tutorials on the internet where the database also stores the Node-Red flow files.
+This is suitable for a work flow where development is done remotely.
+However, I prefer a work flow where all development is done
+locally and the flow files are then pushed to repository from where they are deployed automatically.
+
+=== Create the application and the database
+. create a <<Bac>> if not already done.
+. from the Bluemix Dashboard page, click on the _Catalog_ menu.
+. from the Starter Kits Category, click on _Node-Red Starter_
+. enter the App name: _My-Node-RED-App_
+. selected Plan: _Lite_
+. select the _Cloudant_ service to be connected to the app:
+
+.The Cloudant Service link
+image::select-cloudant.png[Cloudant]
+
+
+This opens the _Getting started_ pane of the application's dashboard:
+
+.The _My-Node-RED-App_ Dashboard
+image::app.png[App Dashboard]
+
+Ready to activate Toolchain support.
+
+=== Create the continuous delivery toolchain
+
+. Click _Overview_
+. on the bottom right _Continuous delivery_ click on _Enable_.
+. in the _Repository Type_ drop down menu, select _New_.
+. enter the <<Bac>>
+. click on _Create_
+
+This is the dashboard of the Continuous Delivery Toolchain:
+
+.The Continuous Delivery Toolchain
+image::toolchain.png[Toolchain]
+
+Get access to this repository:
+
+. click on the Git tile.
+. set up the git access code using a public SSH key: `top right corner icon -> Settings -> SSH Keys`
+. copy the link to the repository and clone it:
+
+.The new empty repository for the app
+image::git.png[Git]
+
+[listing]
+$ git clone git@eu-gb.git.cloud.ibm.com:<your name>/My-Node-RED-App.git
+
+NOTE: the directory _My-Node-RED-App_ into which I cloned the repository is called the *project directory*.
+
+
+Go back to the application's dashboard, then click on `Runtime -> Environment variables
+-> VCAP_SERVICES -> Export` to export this environment variable to
+a file named `My-Node-RED-App_vcap.json` into the project directory.
+
+This file now contains all the Bluemix specific data needed to run the app locally.

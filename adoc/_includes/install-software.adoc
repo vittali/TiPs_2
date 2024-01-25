@@ -1,0 +1,46 @@
+
+== Install local software
+
+Install the Node-RED stack and the IBM Cloud (CLI) on Linux Mint 18.
+
+=== Node-RED
+
+There are many ways to install Node-RED. I choose the
+https://github.com/nodesource/distributions/blob/master/README.md[following]:
+
+[source,bash]
+----
+$ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+$ sudo apt-get install -y nodejs
+$ sudo npm install -g node-red <1>
+$ sudo npm install -g mqtt <2>
+----
+<1> This might result in:
+{sp} +
+`gyp ERR! stack Error: EACCES: permission denied, mkdir '/usr/lib/node_modules/node-red/node_modules/bcrypt/.node-gyp'`
+{sp} +
+I used the `--unsafe-perm` option to fix the https://github.com/nodejs/node-gyp/issues/1619[problem]:
+{sp} +
+`$ sudo npm install -g --unsafe-perm node-red`
+{sp} +
+<2> since the test client uses the `require` mechanism and I installed the `mqtt` module globally,
+`NODE_PATH` must include the global `node_modules` directory tree, for example:
+{sp} +
+`export NODE_PATH=/usr/lib/node_modules`
+{sp} +
+
+
+The later node module is required for the mqtt test client.
+
+I also need `node-red-admin` to generate a password hash:
+
+[listing]
+$ sudo npm install -g node-red-admin
+
+=== Bluemix CLI
+
+The IBM Cloud Command Line Interface (CLI) is a tool to monitor all aspects of
+the remote infrastructure from the local terminal.
+The most important function for this memo is the visualization of log files.
+
+Install the IBM Cloud CLI [https://github.com/IBM-Cloud/ibm-cloud-cli-release/releases].

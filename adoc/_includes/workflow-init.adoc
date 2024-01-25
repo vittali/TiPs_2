@@ -1,0 +1,70 @@
+
+== Initialize the work flow
+
+With `package.json` in place, finish the installation:
+
+[listing]
+$ npm install
+
+=== Initialize the app
+
+The first time the app is run, Node-RED will generate a credential file for `flow.json` named
+`flow_cred.json`. This file contains sensitive data like the <<akat>>.
+The NR-flow access code is used by Node-RED to decrypt this file.
+
+Run the app from the project directory:
+
+[listing]
+$ ./run-app.sh
+
+. enter the username provided in `settings.js` and the password supplied to the `node-red-admin hash-pw` command,
+see <<NRp>>.
+. open the IBM IoT node and enter the <<akat>>. Click on _Deploy_.
+This will generate the credential file `flow_cred.json`.
+. populate the repo, commit and push to Bluemix:
+
+[listing]
+$ git add -A && git commit
+$ git push -u origin master
+
+Open the Delivery Pipeline of the _My-Node-RED-App_ Toolchain dashboard:
+
+.The Delivery Pipelines shows the build-deploy process
+image::stage.png[Deploy Stage]
+
+While the build is running, log into the IBM Cloud CLI:
+
+[listing]
+----
+$ ibmcloud login
+API endpoint: https://cloud.ibm.com
+Region: eu-gb <1>
+Email> <enter the email address you used to register with Bluemix>
+----
+<1> it is very important to set the correct region. Check the domain you selected
+when creating the cloud foundry app.
+
+and set the endpoint:
+
+[listing]
+$ ibmcloud target --cf
+
+After the build has finished, check the log from with IBM Cloud CLI:
+
+[listing]
+$ ibmcloud cf logs My-Node-RED-App --recent
+
+Check the log carefully the first time the app is run.
+The logs might not be available immediately after the build has finished,
+this can take up to a minute.
+
+Check the connection between the app and the database:
+
+[listing]
+$ ibmcloud cf services
+name                              service           plan                bound apps        last operation
+My-IoT-Platform                   iotf-service      iotf-service-free                     create succeeded
+My-Node-RED-App-cloudantNoSQLDB   cloudantNoSQLDB   Lite                My-Node-RED-App   create succeeded
+
+Remember that
+_My-Node-RED-App-cloudantNoSQLDB_ is the service name provided to `manifest.yml`.

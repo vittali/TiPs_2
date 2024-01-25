@@ -1,0 +1,69 @@
+
+== Create the My-IoT-Platform service
+
+I like the following video tutorials prepared by IBM:
+
+* https://www.youtube.com/watch?v=vLMX9gyTEr4[An Introduction to the IBM Cloud - Part 1 - YouTube]
+* https://www.youtube.com/watch?v=OysQX0VwZEY[An Introduction to the IBM Cloud - Part 2 - YouTube]
+
+and the following documents:
+
+* https://cloud.ibm.com/docs/services/IoT?topic=iot-platform-getting-started[IoT Getting started tutorial]
+* https://cloud.ibm.com/docs/services/IoT?topic=iot-platform-connect_devices_apps_gw[Connection information for applications, devices, and gateways]
+* https://www.ibm.com/support/knowledgecenter/SSQP8H/iot/platform/devices/device_dev_index.html[Device development]
+* https://www.ibm.com/support/knowledgecenter/SSQP8H/iot/platform/reference/guardian/security_policies.html#set_up_policies.html[Configuring security policies]
+
+On the Bluemix Dashboard, click on `Catalog -> Internet of Things -> Internet of Things Platform`
+to create an instance of the IoT Platform service. Choose _My-IoT-Platform_ as name.
+ Once the instance has been created, I get another dashboard:
+
+.The dashboard of the _My-IoT-Platform_ service instance
+image::start-iot.png[Git]
+
+=== Generate the IOT Platform access code:
+
+. click on the _Launch_ button.
+. on the IoT Platform Dashboard click on _Apps_, and on the top right corner click on _Generate Api Key_.
+. leave the defaults and click _Generate Key_.
+. copy the API Key and the Authentification Token right now because you won't be able to see the again.
+
+[[akat, IoT Platform access code]]
+NOTE: Remember: I refer to this pair of strings (API Key,Authentification Token)
+as the _IoT Platform_ access code, see <<table1>>.
+I need it later to modify the Node-RED flow application template file.
+This allows me to access the remote Cloudant database when developing the app locally.
+
+=== Configure connection security
+
+To simplify testing, I change the default setting for connection security:
+
+. in the IoT Dashboard, click on `Security -> Connection Security` and edit the _Default Rule_.
+. in the _Default_ drop down menu, select _TLS Optional_.
+
+Note that this is not recommended for a production environment.
+The reason for this change is that the `mqtt` node.js module I use as test mqtt client
+doesn't seem to use ssl out of the box and I wanted to keep things as simple as possible.
+
+See also https://www.ibm.com/support/knowledgecenter/SSQP8H/iot/platform/reference/guardian/security_policies.html#set_up_policies.html[Configuring security policies].
+
+=== Configure Devices
+
+Device type creation and device creation is explained in the tutorial material mentioned at the beginning of this chapter
+and therefore the following tasks are simple:
+
+. create a new DeviceType with name _nodejs-client_
+. and a device of this type with name _nodejs-client-1_
+. click until your are asked to provide a Device Authentication Token.
+
+[[dat, DAT access code]]
+NOTE: I refer to this token as _DAT_ access code, see <<table1>>. I need it later to
+instantiate the mqtt client test program template.
+
+WARNING: write down the access code, it can't be retrieved once the page is closed.
+
+The dashboard should now look like this:
+
+.The IoT Platform Dashboard after device creation
+image::iot-dashboard.png[IoT Platform Dashboard]
+
+Ready to add and modify the application project files.
